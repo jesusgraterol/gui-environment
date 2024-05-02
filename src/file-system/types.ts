@@ -1,21 +1,3 @@
-/**
- * Utils
- */
-interface IFileSystemUtils {
-  // general actions
-  pathExists(path: string): boolean,
-  readPathItem(path: string): IPathItem | null,
-
-  // directory actions
-  isDirectory(path: string, allowSymbolicLink: boolean): boolean,
-  createDirectory(path: string): void,
-  deleteDirectory(path: string): void,
-
-  // file actions
-  writeTextFile(path: string, data: string): void,
-
-}
-
 
 /**
  * Path Item
@@ -38,6 +20,6 @@ interface IPathItem {
  * Module Exports
  */
 export {
-  IFileSystemUtils,
+  // eslint-disable-next-line import/prefer-default-export
   IPathItem,
 };

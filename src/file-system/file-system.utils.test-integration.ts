@@ -1,4 +1,10 @@
-import Utils from './file-system.utils.js';
+import {
+  deleteDirectory,
+  pathExists,
+  createDirectory,
+  readPathItem,
+  writeTextFile,
+} from './file-system.utils.js';
 
 
 
@@ -9,29 +15,29 @@ const TEST_PATH = 'fs-test-dir';
 describe('General Actions', () => {
   beforeAll(() => { });
 
-  afterAll(() => { Utils.deleteDirectory(TEST_PATH); });
+  afterAll(() => { deleteDirectory(TEST_PATH); });
 
-  beforeEach(() => { Utils.deleteDirectory(TEST_PATH); });
+  beforeEach(() => { deleteDirectory(TEST_PATH); });
 
   afterEach(() => { });
 
   test('can determine if a path does not exist', () => {
-    expect(Utils.pathExists(TEST_PATH)).toBeFalsy();
+    expect(pathExists(TEST_PATH)).toBeFalsy();
   });
 
   test('can determine if a path exists', () => {
-    Utils.createDirectory(TEST_PATH);
-    expect(Utils.pathExists(TEST_PATH)).toBeTruthy();
+    createDirectory(TEST_PATH);
+    expect(pathExists(TEST_PATH)).toBeTruthy();
   });
 
   test('returns null when a path item does not exist', () => {
-    expect(Utils.readPathItem(TEST_PATH)).toBeNull();
-    expect(Utils.readPathItem(`${TEST_PATH}/test-file.txt`)).toBeNull();
+    expect(readPathItem(TEST_PATH)).toBeNull();
+    expect(readPathItem(`${TEST_PATH}/test-file.txt`)).toBeNull();
   });
 
   test('can read a directory\'s item', () => {
-    Utils.createDirectory(TEST_PATH);
-    const item = Utils.readPathItem(TEST_PATH);
+    createDirectory(TEST_PATH);
+    const item = readPathItem(TEST_PATH);
     expect(item).toBeTruthy();
     if (item) {
       expect(item.baseName).toBe(TEST_PATH);
@@ -46,9 +52,9 @@ describe('General Actions', () => {
   });
 
   test('can read a file\'s item', () => {
-    Utils.createDirectory(TEST_PATH);
-    Utils.writeTextFile(`${TEST_PATH}/test-file.txt`, 'Hello World!!');
-    const item = Utils.readPathItem(`${TEST_PATH}/test-file.txt`);
+    createDirectory(TEST_PATH);
+    writeTextFile(`${TEST_PATH}/test-file.txt`, 'Hello World!!');
+    const item = readPathItem(`${TEST_PATH}/test-file.txt`);
     expect(item).toBeTruthy();
     if (item) {
       expect(item.baseName).toBe('test-file.txt');
@@ -70,9 +76,9 @@ describe('General Actions', () => {
 describe('Directory Actions', () => {
   beforeAll(() => { });
 
-  afterAll(() => { Utils.deleteDirectory(TEST_PATH); });
+  afterAll(() => { deleteDirectory(TEST_PATH); });
 
-  beforeEach(() => { Utils.deleteDirectory(TEST_PATH); });
+  beforeEach(() => { deleteDirectory(TEST_PATH); });
 
   afterEach(() => { });
 
@@ -81,11 +87,11 @@ describe('Directory Actions', () => {
   test.todo('can determine if a path exists and is a directory (a symbolic link)');
 
   test('can create, read and delete a directory', () => {
-    expect(Utils.pathExists(TEST_PATH)).toBeFalsy();
-    Utils.createDirectory(TEST_PATH);
-    expect(Utils.pathExists(TEST_PATH)).toBeTruthy();
-    Utils.deleteDirectory(TEST_PATH);
-    expect(Utils.pathExists(TEST_PATH)).toBeFalsy();
+    expect(pathExists(TEST_PATH)).toBeFalsy();
+    createDirectory(TEST_PATH);
+    expect(pathExists(TEST_PATH)).toBeTruthy();
+    deleteDirectory(TEST_PATH);
+    expect(pathExists(TEST_PATH)).toBeFalsy();
   });
 });
 
@@ -95,9 +101,9 @@ describe('Directory Actions', () => {
 describe('File Actions', () => {
   beforeAll(() => { });
 
-  afterAll(() => { Utils.deleteDirectory(TEST_PATH); });
+  afterAll(() => { deleteDirectory(TEST_PATH); });
 
-  beforeEach(() => { Utils.deleteDirectory(TEST_PATH); });
+  beforeEach(() => { deleteDirectory(TEST_PATH); });
 
   afterEach(() => { });
 
