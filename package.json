@@ -1,0 +1,46 @@
+{
+  "name": "gui-environment",
+  "version": "1.0.0",
+  "description": "The gui-environment package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsc",
+    "test": "echo \"Error: tests are executed with  npm run test:(integration|unit)\" && exit 1",
+    "test:integration": "jest --config=jest.test-integration.config.json --no-cache",
+    "test:unit": "jest --config=jest.test-unit.config.json --no-cache"
+  },
+  "bin": {
+    "gui-environment": "dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesusgraterol/gui-environment.git"
+  },
+  "keywords": [
+    "react",
+    "development",
+    "environment",
+    "typescript",
+    "production",
+    "environment-variables",
+    "env",
+    "vite"
+  ],
+  "author": "Jesus Graterol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesusgraterol/gui-environment/issues"
+  },
+  "homepage": "https://github.com/jesusgraterol/gui-environment#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.5"
+  }
+}
