@@ -2,7 +2,7 @@ import { IGUIEnvironmentService } from './types.js';
 
 /**
  * GUI Environment Service Factory
- * Service in charge of handling actions passed to the CLI.
+ * Module in charge of handling actions passed to the binary.
  */
 const GUIEnvironmentServiceFactory = (): IGUIEnvironmentService => {
   /* **********************************************************************************************

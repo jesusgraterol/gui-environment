@@ -22,7 +22,10 @@ interface IGUIEnvironmentUtils {
  * Templates
  */
 interface IGUIEnvironmentTemplates {
-
+  // template builders
+  buildIndex(): string,
+  buildTypes(): string,
+  buildEnvironment(production: boolean): string,
 }
 
 
