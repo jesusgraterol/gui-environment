@@ -1,4 +1,4 @@
-import Templates from './GUIEnvironment.templates.js';
+import Templates from './gui-environment.templates.js';
 
 describe('Template Builders', () => {
   beforeAll(() => { });

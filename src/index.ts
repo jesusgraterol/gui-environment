@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import process from 'node:process';
-import Service from './GUIEnvironment.service.js';
+import { GUIEnvironmentService } from './gui-environment/index.js';
 
 
 /* ************************************************************************************************
@@ -8,7 +8,7 @@ import Service from './GUIEnvironment.service.js';
  ************************************************************************************************ */
 (() => {
   try {
-    Service.executeAction(process.argv);
+    GUIEnvironmentService.executeAction(process.argv);
     process.exit(0);
   } catch (e) {
     console.error(e);
