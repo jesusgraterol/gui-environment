@@ -36,7 +36,27 @@ const buildEnvironmentPath = (
   ? normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}/${fileName}`)
   : normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}`));
 
-const buildFilePath = (srcPath: string, fileName: string | IEnvironmentName): string => (ENVIRONMENT_NAMES.includes(fileName) ? '' : '');
+/**
+ * Puts together the name for a file including its extension.
+ * @param fileName
+ * @returns string
+ */
+const __buildFileName = (fileName: string): string => `${fileName}.${ENVIRONMENT_FILE_EXT}`;
+
+/**
+ * Builds the path for a file. If the fileName is an environment name, it puts together the
+ * full name.
+ * @param srcPath
+ * @param fileName
+ * @returns string
+ */
+const buildFilePath = (srcPath: string, fileName: string | IEnvironmentName): string => (
+  ENVIRONMENT_NAMES.includes(fileName as IEnvironmentName)
+    ? buildEnvironmentPath(srcPath, __buildFileName(`${ENVIRONMENT_BASE_FILE_NAME}.${fileName}`))
+    : buildEnvironmentPath(srcPath, __buildFileName(fileName))
+);
+
+
 
 
 
@@ -52,4 +72,5 @@ export {
 
   // implementation
   buildEnvironmentPath,
+  buildFilePath,
 };
