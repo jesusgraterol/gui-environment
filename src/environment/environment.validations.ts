@@ -15,7 +15,7 @@ import { ERRORS } from './environment.errors.js';
  * - INVALID_PATH: if the provided srcPath is not a valid (pathlike) string
  * - NOT_A_DIRECTORY: if the srcPath does not exist or is not considered a dir by the OS
  */
-const validateSourcePath = (srcPath: string): void => {
+const validateSourcePath = (srcPath: string | undefined): void => {
   if (typeof srcPath !== 'string' || !srcPath.length) {
     throw new Error(encodeError(`The srcPath '${srcPath}' is invalid.`, ERRORS.INVALID_PATH));
   }

@@ -1,4 +1,4 @@
-
+import { IBaseParsedArgs } from 'argv-utils';
 
 /* ************************************************************************************************
  *                                              TYPES                                             *
@@ -11,6 +11,16 @@
 type IEnvironmentName = 'development' | 'staging' | 'production';
 
 
+/**
+ * Module Args
+ * The args that can be passed to the gui-environment CLI
+ */
+interface IModuleArgs extends IBaseParsedArgs {
+  srcPath?: string,
+  init?: 'true',
+  environment?: IEnvironmentName,
+}
+
 
 
 
@@ -19,4 +29,5 @@ type IEnvironmentName = 'development' | 'staging' | 'production';
  ************************************************************************************************ */
 export type {
   IEnvironmentName,
+  IModuleArgs,
 };
