@@ -1,7 +1,12 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect, vi } from 'vitest';
 import { isDirectory } from 'fs-utils-sync';
 import { ERRORS } from './environment.errors.js';
-import { validateSourcePath, validateEnvironmentName } from './environment.validations.js';
+import { buildEnvironmentPath } from './environment.utils.js';
+import {
+  validateSourcePath,
+  validateEnvironmentName,
+  canEnvironmentBeInitialized,
+} from './environment.validations.js';
 
 /* ************************************************************************************************
  *                                             MOCKS                                              *
@@ -49,6 +54,38 @@ describe('validateSourcePath', () => {
     // @ts-ignore
     isDirectory.mockReturnValue(true);
     expect(() => validateSourcePath('someSrcPath')).not.toThrowError();
+  });
+});
+
+
+
+
+
+describe('canEnvironmentBeInitialized', () => {
+  beforeAll(() => { });
+
+  afterAll(() => { });
+
+  beforeEach(() => { });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  test('throws if the environment\'s base directory exists', () => {
+    // @ts-ignore
+    isDirectory.mockReturnValue(true);
+    expect(
+      () => canEnvironmentBeInitialized(buildEnvironmentPath('src')),
+    ).toThrowError(ERRORS.ENVIRONMENT_ALREADY_INITIALIZED);
+  });
+
+  test('passes the validation if the environment directory has not yet been init', () => {
+    // @ts-ignore
+    isDirectory.mockReturnValue(false);
+    expect(
+      () => canEnvironmentBeInitialized(buildEnvironmentPath('src')),
+    ).not.toThrowError();
   });
 });
 

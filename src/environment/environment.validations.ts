@@ -24,8 +24,16 @@ const validateSourcePath = (srcPath: string): void => {
   }
 };
 
+/**
+ * Checks if the environment can be initialized.
+ * @param environmentDirPath
+ * @throws
+ * - ENVIRONMENT_ALREADY_INITIALIZED: if the environment's base directory exists
+ */
 const canEnvironmentBeInitialized = (environmentDirPath: string) => {
-
+  if (isDirectory(environmentDirPath)) {
+    throw new Error(encodeError(`The environment dir '${environmentDirPath} cannot be initialized because it already has been.'`, ERRORS.ENVIRONMENT_ALREADY_INITIALIZED));
+  }
 };
 
 /**
@@ -47,5 +55,6 @@ const validateEnvironmentName = (name: IEnvironmentName) => {
  ************************************************************************************************ */
 export {
   validateSourcePath,
+  canEnvironmentBeInitialized,
   validateEnvironmentName,
 };
