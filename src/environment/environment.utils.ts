@@ -41,7 +41,7 @@ const buildEnvironmentPath = (
  * @param fileName
  * @returns string
  */
-const __buildFileName = (fileName: string): string => `${fileName}.${ENVIRONMENT_FILE_EXT}`;
+const __buildFileName = (fileName: string): string => `${fileName}${ENVIRONMENT_FILE_EXT}`;
 
 /**
  * Builds the path for a file. If the fileName is an environment name, it puts together the
