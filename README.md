@@ -20,9 +20,15 @@ Include the `gui-environment` binary in your `package.json` file:
 ```json
 ...
 "scripts": {
-  "build-dev": "gui-environment --srcPath='src' --environment='development' && tsc && ...",
-  "build-staging": "gui-environment --srcPath='src' --environment='staging' && tsc && ...",,
-  "build-production": "gui-environment --srcPath='src' --environment='production' && tsc && ...",
+  // create the shortcuts
+  "env-dev": "gui-environment --srcPath='src' --environment='development'",
+  "env-st": "gui-environment --srcPath='src' --environment='staging'",
+  "env-prod": "gui-environment --srcPath='src' --environment='production'",
+  
+  // add them to your build scripts
+  "build-dev": "npm run env-dev && tsc && ...",
+  "build-staging": "npm run env-st && tsc && ...",,
+  "build-production": "npm run env-prod && tsc && ...",
 }
 ...
 ```
