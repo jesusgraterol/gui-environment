@@ -24,6 +24,19 @@ The `gui-environment` package is a command-line tool that simplifies managing en
 
 <br/>
 
+## Running the Tests
+```bash
+# Unit Tests
+$ npm run test:unit
+
+# Integration Tests
+$ npm run test:integration
+```
+
+
+
+<br/>
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -36,7 +49,7 @@ The `gui-environment` package is a command-line tool that simplifies managing en
 
 ## Acknowledgments
 
-- [Angular](https://angular.dev/)
+- [Angular CLI](https://angular.dev/)
 
 
 

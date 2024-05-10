@@ -88,10 +88,25 @@ describe('executeAction', () => {
 
 
   describe('install', () => {
-    test.todo('throws if an invalid environment name is provided');
+    test('throws if an invalid environment name is provided', () => {
+      createDirectory(SRC);
+      expect(() => executeAction(a({ srcPath: SRC, environment: <IEnvironmentName>'dev' }))).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
+    });
 
-    test.todo('initializes the environment in case it hadn\'t been');
+    test('initializes the environment in case it hadn\'t been', () => {
+      createDirectory(SRC);
+      executeAction(a({ srcPath: SRC, environment: 'development' }));
+      expect(rf('environment')).toBe(buildEnvironment(false));
+    });
 
-    test.todo('can install any environment');
+    test('can install any environment', () => {
+      createDirectory(SRC);
+      executeAction(a({ srcPath: SRC, init: 'true' }));
+      expect(rf('environment')).toBe(buildEnvironment(false));
+      executeAction(a({ srcPath: SRC, environment: 'production' }));
+      expect(rf('environment')).toBe(buildEnvironment(true));
+      executeAction(a({ srcPath: SRC, environment: 'staging' }));
+      expect(rf('environment')).toBe(buildEnvironment(false));
+    });
   });
 });

@@ -62,6 +62,14 @@ const __install = (srcPath: string, environment: IEnvironmentName): void => {
   __installEnvironment(srcPath, environment);
 };
 
+
+
+
+
+/* ************************************************************************************************
+ *                                            EXECUTION                                           *
+ ************************************************************************************************ */
+
 /**
  * Executes an action based on the passed arguments.
  * @param args
