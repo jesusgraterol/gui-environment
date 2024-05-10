@@ -1,0 +1,51 @@
+import { encodeError } from 'error-message-utils';
+import { isDirectory } from 'fs-utils-sync';
+import { IEnvironmentName } from './types.js';
+import { ERRORS } from './environment.errors.js';
+
+
+/* ************************************************************************************************
+ *                                         IMPLEMENTATION                                         *
+ ************************************************************************************************ */
+
+/**
+ * Verifies the provided srcPath is valid and it actually exists.
+ * @param srcPath
+ * @throws
+ * - INVALID_PATH: if the provided srcPath is not a valid (pathlike) string
+ * - NOT_A_DIRECTORY: if the srcPath does not exist or is not considered a dir by the OS
+ */
+const validateSourcePath = (srcPath: string): void => {
+  if (typeof srcPath !== 'string' || !srcPath.length) {
+    throw new Error(encodeError(`The srcPath '${srcPath}' is invalid.`, ERRORS.INVALID_PATH));
+  }
+  if (!isDirectory(srcPath)) {
+    throw new Error(encodeError(`The srcPath directory '${srcPath}' does not exist or is not considered a directory by the OS.`, ERRORS.NOT_A_DIRECTORY));
+  }
+};
+
+const canEnvironmentBeInitialized = (environmentDirPath: string) => {
+
+};
+
+/**
+ * Verifies the provided environment name is valid.
+ * @param name
+ * @throws
+ * - INVALID_ENVIRONMENT_NAME: if the name does not match the supported values
+ */
+const validateEnvironmentName = (name: IEnvironmentName) => {
+  if (name !== 'development' && name !== 'staging' && name !== 'production') {
+    throw new Error(encodeError(`The provided environment name '${name}' is invalid.`, ERRORS.INVALID_ENVIRONMENT_NAME));
+  }
+};
+
+
+
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
+export {
+  validateSourcePath,
+  validateEnvironmentName,
+};

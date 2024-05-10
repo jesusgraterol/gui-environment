@@ -1,6 +1,6 @@
 # GUI Environment
 
-The `gui-environment` package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.
+The `gui-environment` package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development, staging or production) for a smooth development workflow.
 
 </br>
 

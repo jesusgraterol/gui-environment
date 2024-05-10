@@ -1,14 +1,11 @@
 #! /usr/bin/env node
 import process from 'node:process';
-import { GUIEnvironmentService } from './gui-environment/index.js';
+import { parseArgs } from 'argv-utils';
+import { executeAction } from './environment/index.js';
 
-
-/* ************************************************************************************************
- *                                           EXECUTION                                            *
- ************************************************************************************************ */
 (() => {
   try {
-    GUIEnvironmentService.executeAction(process.argv);
+    executeAction(parseArgs(process.argv));
     process.exit(0);
   } catch (e) {
     console.error(e);
