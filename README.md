@@ -80,7 +80,15 @@ ENVIRONMENT
 //    version: '1.0.0'
 // }
 ```
-Keep in mind that whatever data you include in these files will be public when your app is deployed. Avoid including sensitive information such as API keys, secrets, etc...
+
+Since the `environment.ts` file is automatically generated, it can be included in the `.gitignore` file:
+```
+...
+src/environment/environment.ts
+...
+```
+
+Keep in mind that whatever data you include in these files will be public when your app is deployed. Avoid sharing sensitive information such as API keys, secrets, etc...
 
 
 <br/>
