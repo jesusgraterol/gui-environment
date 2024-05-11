@@ -27,7 +27,7 @@ Include the `gui-environment` binary in your `package.json` file:
   
   // add them to your build scripts
   "build-dev": "npm run env-dev && tsc && ...",
-  "build-staging": "npm run env-st && tsc && ...",,
+  "build-staging": "npm run env-st && tsc && ...",
   "build-production": "npm run env-prod && tsc && ...",
 }
 ...
