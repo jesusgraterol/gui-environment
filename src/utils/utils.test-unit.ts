@@ -1,9 +1,11 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
-import { ERRORS } from '../shared/errors.js';
 import {
   ENVIRONMENT_BASE_FILE_NAME,
   ENVIRONMENT_DIR_NAME,
   ENVIRONMENT_FILE_EXT,
+  ERRORS,
+} from '../shared/index.js';
+import {
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,

@@ -1,28 +1,13 @@
 import { normalize } from 'node:path';
 import { encodeError } from 'error-message-utils';
-import { IEnvironmentName, ERRORS } from '../shared/index.js';
-
-
-/* ************************************************************************************************
- *                                           CONSTANTS                                            *
- ************************************************************************************************ */
-
-// environment directory name
-const ENVIRONMENT_DIR_NAME: string = 'environment';
-
-// environment base file name
-const ENVIRONMENT_BASE_FILE_NAME: string = 'environment';
-
-// environment file extension name
-const ENVIRONMENT_FILE_EXT: string = '.ts';
-
-// the list of supported environment names
-const ENVIRONMENT_NAMES: IEnvironmentName[] = ['development', 'staging', 'production'];
-
-// the path to the git ignore file
-const GIT_IGNORE_PATH: string = '.gitignore';
-
-
+import {
+  IEnvironmentName,
+  ENVIRONMENT_DIR_NAME,
+  ENVIRONMENT_FILE_EXT,
+  ENVIRONMENT_BASE_FILE_NAME,
+  ENVIRONMENT_NAMES,
+  ERRORS,
+} from '../shared/index.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -93,13 +78,6 @@ const getEnvironmentName = (
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
-  // constants
-  ENVIRONMENT_DIR_NAME,
-  ENVIRONMENT_NAMES,
-  ENVIRONMENT_BASE_FILE_NAME,
-  ENVIRONMENT_FILE_EXT,
-  GIT_IGNORE_PATH,
-
   // implementation
   buildEnvironmentPath,
   buildFilePath,

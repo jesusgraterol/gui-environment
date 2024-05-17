@@ -1,7 +1,6 @@
 import { copyFile, isDirectory, writeTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs } from '../shared/index.js';
+import { IEnvironmentName, IModuleArgs, ENVIRONMENT_NAMES } from '../shared/index.js';
 import {
-  ENVIRONMENT_NAMES,
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,
@@ -23,6 +22,10 @@ const __installEnvironment = (srcPath: string, name: IEnvironmentName): void => 
   buildFilePath(srcPath, 'environment'),
 );
 
+const __addEnvironmentToGITIgnore = (srcPath: string) => {
+
+};
+
 /**
  * Initializes the environment base directory as well as all the required files. Once done, it
  * installs the development environment.
@@ -41,7 +44,7 @@ const __init = (srcPath: string): void => {
   __installEnvironment(srcPath, 'development');
 
   // add the automatically generated environment file to .gitignore
-  // ...
+  __addEnvironmentToGITIgnore(srcPath);
 };
 
 /**
