@@ -16,9 +16,11 @@ type IEnvironmentName = 'development' | 'staging' | 'production';
  * The args that can be passed to the gui-environment CLI
  */
 interface IModuleArgs extends IBaseParsedArgs {
-  srcPath?: string,
+  src?: string,
   init?: 'true',
-  environment?: IEnvironmentName,
+  development?: 'true',
+  staging?: 'true',
+  production?: 'true',
 }
 
 

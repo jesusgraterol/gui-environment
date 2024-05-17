@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
-import { buildEnvironment } from './environment.templates.js';
+import { buildEnvironment } from './templates.js';
 
 describe('buildEnvironment', () => {
   beforeAll(() => { });

@@ -1,5 +1,5 @@
 import { normalize } from 'node:path';
-import { IEnvironmentName } from './types.js';
+import { IEnvironmentName } from '../shared/index.js';
 
 /* ************************************************************************************************
  *                                           CONSTANTS                                            *

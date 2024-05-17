@@ -1,8 +1,6 @@
 import { encodeError } from 'error-message-utils';
 import { isDirectory } from 'fs-utils-sync';
-import { IEnvironmentName } from './types.js';
-import { ERRORS } from './environment.errors.js';
-
+import { IEnvironmentName, ERRORS } from '../shared/index.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -17,10 +15,10 @@ import { ERRORS } from './environment.errors.js';
  */
 const validateSourcePath = (srcPath: string | undefined): void => {
   if (typeof srcPath !== 'string' || !srcPath.length) {
-    throw new Error(encodeError(`The srcPath '${srcPath}' is invalid.`, ERRORS.INVALID_PATH));
+    throw new Error(encodeError(`The src '${srcPath}' is invalid.`, ERRORS.INVALID_PATH));
   }
   if (!isDirectory(srcPath)) {
-    throw new Error(encodeError(`The srcPath directory '${srcPath}' does not exist or is not considered a directory by the OS.`, ERRORS.NOT_A_DIRECTORY));
+    throw new Error(encodeError(`The src directory '${srcPath}' does not exist or is not considered a directory by the OS.`, ERRORS.NOT_A_DIRECTORY));
   }
 };
 
