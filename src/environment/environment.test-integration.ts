@@ -1,7 +1,7 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
 import { createDirectory, deleteDirectory, readTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs, ERRORS } from '../shared/index.js';
-import { ENVIRONMENT_NAMES, buildFilePath } from '../utils/index.js';
+import { IEnvironmentName, IModuleArgs, ENVIRONMENT_NAMES, ERRORS } from '../shared/index.js';
+import { buildFilePath } from '../utils/index.js';
 import { buildEnvironment, buildIndex, buildTypes } from '../templates/index.js';
 import { executeAction } from './environment.js';
 

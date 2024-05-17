@@ -70,7 +70,14 @@ const getEnvironmentName = (
   throw new Error(encodeError('The provided environment name is invalid. Ensure to invoke the CLI with a valid environment name: gui-environment (--development | --staging | --production)', ERRORS.INVALID_ENVIRONMENT_NAME));
 };
 
-
+/**
+ * Builds the content that will be added to the .gitignore file. Ensure to enable append if the file
+ * exists.
+ * @param src
+ * @param toBeAppended?
+ * @returns string
+ */
+const buildGITIgnoreContent = (src: string, toBeAppended?: boolean): string => `${toBeAppended ? '\n' : ''}# gui-environment output\n${buildFilePath(src, 'environment')}\n`;
 
 
 
@@ -82,4 +89,5 @@ export {
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,
+  buildGITIgnoreContent,
 };

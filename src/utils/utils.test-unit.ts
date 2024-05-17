@@ -9,6 +9,7 @@ import {
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,
+  buildGITIgnoreContent,
 } from './utils.js';
 
 
@@ -75,5 +76,22 @@ describe('getEnvironmentName', () => {
     expect(getEnvironmentName('true')).toBe('development');
     expect(getEnvironmentName(undefined, 'true')).toBe('staging');
     expect(getEnvironmentName(undefined, undefined, 'true')).toBe('production');
+  });
+});
+
+
+
+
+
+describe('buildGITIgnoreContent', () => {
+  test('can build the content for a .gitignore file that does not exist', () => {
+    expect(buildGITIgnoreContent('src')).toBe(
+      `# gui-environment output\n${buildFilePath('src', 'environment')}\n`,
+    );
+  });
+  test('can build the content for a .gitignore file that already exists', () => {
+    expect(buildGITIgnoreContent('src', true)).toBe(
+      `\n# gui-environment output\n${buildFilePath('src', 'environment')}\n`,
+    );
   });
 });

@@ -1,9 +1,21 @@
-import { copyFile, isDirectory, writeTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs, ENVIRONMENT_NAMES } from '../shared/index.js';
+import {
+  copyFile,
+  isDirectory,
+  isFile,
+  readTextFile,
+  writeTextFile,
+} from 'fs-utils-sync';
+import {
+  IEnvironmentName,
+  IModuleArgs,
+  ENVIRONMENT_NAMES,
+  GIT_IGNORE_PATH,
+} from '../shared/index.js';
 import {
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,
+  buildGITIgnoreContent,
 } from '../utils/index.js';
 import { buildIndex, buildTypes, buildEnvironment } from '../templates/index.js';
 import { validateSourcePath, canEnvironmentBeInitialized } from '../validations/index.js';
@@ -22,8 +34,22 @@ const __installEnvironment = (srcPath: string, name: IEnvironmentName): void => 
   buildFilePath(srcPath, 'environment'),
 );
 
-const __addEnvironmentToGITIgnore = (srcPath: string) => {
-
+/**
+ * Adds the automatically generated environment file into the .gitignore file. If the file already
+ * exists, the content will be appended in case it hasn't already been.
+ * @param srcPath
+ */
+const __addEnvironmentToGITIgnore = (srcPath: string): void => {
+  if (isFile(GIT_IGNORE_PATH)) {
+    let originalContent = readTextFile(GIT_IGNORE_PATH);
+    const outputContent = buildGITIgnoreContent(srcPath, true);
+    if (!originalContent.includes(outputContent)) {
+      originalContent += outputContent;
+      writeTextFile(GIT_IGNORE_PATH, originalContent);
+    }
+  } else {
+    writeTextFile(GIT_IGNORE_PATH, buildGITIgnoreContent(srcPath));
+  }
 };
 
 /**
