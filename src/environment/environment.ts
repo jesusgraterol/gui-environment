@@ -1,6 +1,5 @@
-import { encodeError } from 'error-message-utils';
 import { copyFile, isDirectory, writeTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs, ERRORS } from '../shared/index.js';
+import { IEnvironmentName, IModuleArgs } from '../shared/index.js';
 import {
   ENVIRONMENT_NAMES,
   buildEnvironmentPath,
@@ -72,7 +71,6 @@ const __install = (srcPath: string, environment: IEnvironmentName): void => {
  * Executes an action based on the passed arguments.
  * @param args
  * @throws
- * - INVALID_CLI_ACTION: if an invalid action or no action at all is provided.
  * - INVALID_PATH: if the provided src has an invalid format
  * - NOT_A_DIRECTORY: if the src is not a valid directory
  * - INVALID_ENVIRONMENT_NAME: if the provided environment name is not supported by the package
@@ -90,10 +88,8 @@ const executeAction = ({
   // execute the action accordingly
   if (init) {
     __init(src);
-  } else if (development || staging || production) {
-    __install(src, getEnvironmentName(development, staging, production));
   } else {
-    throw new Error(encodeError('The CLI must be invoked with a valid action such as: gui-environment --init or gui-environment (--development | --staging | --production)', ERRORS.INVALID_CLI_ACTION));
+    __install(src, getEnvironmentName(development, staging, production));
   }
 };
 

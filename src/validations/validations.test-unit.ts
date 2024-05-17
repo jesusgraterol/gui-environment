@@ -2,10 +2,7 @@ import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect, vi 
 import { isDirectory } from 'fs-utils-sync';
 import { ERRORS } from '../shared/index.js';
 import { buildEnvironmentPath } from '../utils/index.js';
-import {
-  validateSourcePath,
-  canEnvironmentBeInitialized,
-} from './validations.js';
+import { validateSourcePath, canEnvironmentBeInitialized } from './validations.js';
 
 /* ************************************************************************************************
  *                                             MOCKS                                              *

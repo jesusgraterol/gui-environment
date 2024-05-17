@@ -1,9 +1,8 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
 import { createDirectory, deleteDirectory, readTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs } from './types.js';
-import { ERRORS } from './environment.errors.js';
-import { ENVIRONMENT_NAMES, buildFilePath } from './environment.utils.js';
-import { buildEnvironment, buildIndex, buildTypes } from './environment.templates.js';
+import { IEnvironmentName, IModuleArgs, ERRORS } from '../shared/index.js';
+import { ENVIRONMENT_NAMES, buildFilePath } from '../utils/index.js';
+import { buildEnvironment, buildIndex, buildTypes } from '../templates/index.js';
 import { executeAction } from './environment.js';
 
 /* ************************************************************************************************
@@ -20,10 +19,18 @@ const SRC: string = 'src-test';
  ************************************************************************************************ */
 
 // builds the args object
-const a = ({ srcPath, init, environment }: Partial<IModuleArgs>): IModuleArgs => (<IModuleArgs>{
-  srcPath,
+const a = ({
+  src,
   init,
-  environment,
+  development,
+  staging,
+  production,
+}: Partial<IModuleArgs>): IModuleArgs => (<IModuleArgs>{
+  src,
+  init,
+  development,
+  staging,
+  production,
 });
 
 //  reads a file by name
@@ -49,17 +56,13 @@ describe('executeAction', () => {
   });
 
   describe('general', () => {
-    test('throws if no srcPath is provided', () => {
-      expect(() => executeAction(a({}))).toThrowError(ERRORS.INVALID_PATH);
-    });
-
-    test('throws if the srcPath does not exist', () => {
-      expect(() => executeAction(a({ srcPath: SRC }))).toThrowError(ERRORS.NOT_A_DIRECTORY);
+    test('throws if the src does not exist', () => {
+      expect(() => executeAction(a({ src: SRC }))).toThrowError(ERRORS.NOT_A_DIRECTORY);
     });
 
     test('throws if no action is provided', () => {
       createDirectory(SRC);
-      expect(() => executeAction(a({ srcPath: SRC }))).toThrowError(ERRORS.INVALID_CLI_ACTION);
+      expect(() => executeAction(a({ src: SRC }))).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
     });
   });
 
@@ -70,7 +73,7 @@ describe('executeAction', () => {
   describe('init', () => {
     test('can fully initialize the environment', () => {
       createDirectory(SRC);
-      executeAction(a({ srcPath: SRC, init: 'true' }));
+      executeAction(a({ src: SRC, init: 'true' }));
       expect(rf('index')).toBe(buildIndex());
       expect(rf('types')).toBe(buildTypes());
       ENVIRONMENT_NAMES.forEach((n) => expect(rf(n)).toBe(buildEnvironment(n === 'production')));
@@ -79,8 +82,8 @@ describe('executeAction', () => {
 
     test('cannot initialize the environment twice', () => {
       createDirectory(SRC);
-      executeAction(a({ srcPath: SRC, init: 'true' }));
-      expect(() => executeAction(a({ srcPath: SRC, init: 'true' }))).toThrowError(ERRORS.ENVIRONMENT_ALREADY_INITIALIZED);
+      executeAction(a({ src: SRC, init: 'true' }));
+      expect(() => executeAction(a({ src: SRC, init: 'true' }))).toThrowError(ERRORS.ENVIRONMENT_ALREADY_INITIALIZED);
     });
   });
 
@@ -88,24 +91,19 @@ describe('executeAction', () => {
 
 
   describe('install', () => {
-    test('throws if an invalid environment name is provided', () => {
-      createDirectory(SRC);
-      expect(() => executeAction(a({ srcPath: SRC, environment: <IEnvironmentName>'dev' }))).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
-    });
-
     test('initializes the environment in case it hadn\'t been', () => {
       createDirectory(SRC);
-      executeAction(a({ srcPath: SRC, environment: 'development' }));
+      executeAction(a({ src: SRC, development: 'true' }));
       expect(rf('environment')).toBe(buildEnvironment(false));
     });
 
     test('can install any environment', () => {
       createDirectory(SRC);
-      executeAction(a({ srcPath: SRC, init: 'true' }));
+      executeAction(a({ src: SRC, init: 'true' }));
       expect(rf('environment')).toBe(buildEnvironment(false));
-      executeAction(a({ srcPath: SRC, environment: 'production' }));
+      executeAction(a({ src: SRC, production: 'true' }));
       expect(rf('environment')).toBe(buildEnvironment(true));
-      executeAction(a({ srcPath: SRC, environment: 'staging' }));
+      executeAction(a({ src: SRC, staging: 'true' }));
       expect(rf('environment')).toBe(buildEnvironment(false));
     });
   });
