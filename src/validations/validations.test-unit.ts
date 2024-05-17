@@ -4,7 +4,6 @@ import { ERRORS } from '../shared/index.js';
 import { buildEnvironmentPath } from '../utils/index.js';
 import {
   validateSourcePath,
-  validateEnvironmentName,
   canEnvironmentBeInitialized,
 } from './validations.js';
 
@@ -86,28 +85,5 @@ describe('canEnvironmentBeInitialized', () => {
     expect(
       () => canEnvironmentBeInitialized(buildEnvironmentPath('src')),
     ).not.toThrowError();
-  });
-});
-
-
-
-
-
-describe('validateEnvironmentName', () => {
-  test('throws if an invalid environment name is passed', () => {
-    // @ts-ignore
-    expect(() => validateEnvironmentName()).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
-    // @ts-ignore
-    expect(() => validateEnvironmentName('dev')).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
-    // @ts-ignore
-    expect(() => validateEnvironmentName('DEVELOPMENT')).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
-    // @ts-ignore
-    expect(() => validateEnvironmentName('prod')).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
-  });
-
-  test('the validation passes when the proper names are provided', () => {
-    expect(() => validateEnvironmentName('development')).not.toThrowError();
-    expect(() => validateEnvironmentName('staging')).not.toThrowError();
-    expect(() => validateEnvironmentName('production')).not.toThrowError();
   });
 });

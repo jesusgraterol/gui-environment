@@ -8,11 +8,7 @@ import {
   getEnvironmentName,
 } from '../utils/index.js';
 import { buildIndex, buildTypes, buildEnvironment } from '../templates/index.js';
-import {
-  validateSourcePath,
-  canEnvironmentBeInitialized,
-  validateEnvironmentName,
-} from '../validations/index.js';
+import { validateSourcePath, canEnvironmentBeInitialized } from '../validations/index.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -58,7 +54,6 @@ const __init = (srcPath: string): void => {
  * - INVALID_ENVIRONMENT_NAME: if the provided environment name is not supported
  */
 const __install = (srcPath: string, environment: IEnvironmentName): void => {
-  validateEnvironmentName(environment);
   if (!isDirectory(buildEnvironmentPath(srcPath))) {
     __init(srcPath);
   }

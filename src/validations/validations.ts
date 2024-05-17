@@ -1,6 +1,6 @@
 import { encodeError } from 'error-message-utils';
 import { isDirectory } from 'fs-utils-sync';
-import { IEnvironmentName, ERRORS } from '../shared/index.js';
+import { ERRORS } from '../shared/index.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -34,18 +34,6 @@ const canEnvironmentBeInitialized = (environmentDirPath: string) => {
   }
 };
 
-/**
- * Verifies the provided environment name is valid.
- * @param name
- * @throws
- * - INVALID_ENVIRONMENT_NAME: if the name does not match the supported values
- */
-const validateEnvironmentName = (name: IEnvironmentName) => {
-  if (name !== 'development' && name !== 'staging' && name !== 'production') {
-    throw new Error(encodeError(`The provided environment name '${name}' is invalid.`, ERRORS.INVALID_ENVIRONMENT_NAME));
-  }
-};
-
 
 
 /* ************************************************************************************************
@@ -54,5 +42,4 @@ const validateEnvironmentName = (name: IEnvironmentName) => {
 export {
   validateSourcePath,
   canEnvironmentBeInitialized,
-  validateEnvironmentName,
 };
