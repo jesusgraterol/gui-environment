@@ -1,6 +1,6 @@
 {
   "name": "gui-environment",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The gui-environment package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,9 @@
     "start": "ts-lib-builder --tsconfigPath=tsconfig.build.json",
     "test": "echo \"Error: tests are executed with  npm run test:(integration|unit)\" && exit 1",
     "test:integration": "vitest run --config vitest.test-integration.config.ts",
-    "test:unit": "vitest run --config vitest.test-unit.config.ts"
+    "test:unit": "vitest run --config vitest.test-unit.config.ts",
+    "watch-test:integration": "vitest --config vitest.test-integration.config.ts",
+    "watch-test:unit": "vitest --config vitest.test-unit.config.ts"
   },
   "bin": {
     "gui-environment": "dist/index.js"

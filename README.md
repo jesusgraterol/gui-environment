@@ -8,27 +8,27 @@ The `gui-environment` package is a command-line tool that simplifies managing en
 
 Install the package:
 ```bash
-$ npm install -S gui-environment
+$ npm install -D gui-environment
 ```
 
 Initialize your project's environment:
 ```bash
-$ npx gui-environment --srcPath="src" --init
+$ npx gui-environment --init
+
+# Using a custom source path
+$ npx gui-environment --src="custom-src" --init
 ```
 
 Include the `gui-environment` binary in your `package.json` file:
 ```json
 ...
 "scripts": {
-  // create the shortcuts
-  "env-dev": "gui-environment --srcPath='src' --environment='development'",
-  "env-st": "gui-environment --srcPath='src' --environment='staging'",
-  "env-prod": "gui-environment --srcPath='src' --environment='production'",
-  
-  // add them to your build scripts
-  "build-dev": "npm run env-dev && tsc && ...",
-  "build-staging": "npm run env-st && tsc && ...",
-  "build-production": "npm run env-prod && tsc && ...",
+  "build-dev": "gui-environment --development && tsc && ...",
+  "build-staging": "gui-environment --staging && tsc && ...",
+  "build-production": "gui-environment --production && tsc && ...",
+
+  // Using a custom source path
+  "build-dev": "gui-environment --src='custom-src' --development && tsc && ...",
 }
 ...
 ```
@@ -81,14 +81,12 @@ ENVIRONMENT
 // }
 ```
 
-Since the `environment.ts` file is automatically generated, it can be included in the `.gitignore` file:
-```
-...
-src/environment/environment.ts
-...
-```
+<br/>
 
-Keep in mind that whatever data you include in these files will be public when your app is deployed. Avoid sharing sensitive information such as API keys, secrets, etc...
+**Important:** keep in mind that whatever data you include in these files will be public when your app is deployed. Avoid sharing sensitive information such as API keys, secrets, etc...
+
+
+
 
 
 <br/>
