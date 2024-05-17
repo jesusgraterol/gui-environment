@@ -1,5 +1,7 @@
 import { normalize } from 'node:path';
-import { IEnvironmentName } from '../shared/index.js';
+import { encodeError } from 'error-message-utils';
+import { IEnvironmentName, ERRORS } from '../shared/index.js';
+
 
 /* ************************************************************************************************
  *                                           CONSTANTS                                            *
@@ -56,6 +58,32 @@ const buildFilePath = (srcPath: string, fileName: string | IEnvironmentName): st
     : buildEnvironmentPath(srcPath, __buildFileName(fileName))
 );
 
+/**
+ * Determines the environment name based on the provided args.
+ * @param development?
+ * @param staging?
+ * @param production?
+ * @returns IEnvironmentName
+ * @throws
+ * - INVALID_ENVIRONMENT_NAME: if no environment name can be extracted
+ */
+const getEnvironmentName = (
+  development?: 'true',
+  staging?: 'true',
+  production?: 'true',
+): IEnvironmentName => {
+  if (development) {
+    return 'development';
+  }
+  if (staging) {
+    return 'staging';
+  }
+  if (production) {
+    return 'production';
+  }
+  throw new Error(encodeError('The provided environment name is invalid. Ensure to invoke the CLI with a valid environment name: gui-environment (--development | --staging | --production)', ERRORS.INVALID_ENVIRONMENT_NAME));
+};
+
 
 
 
@@ -73,4 +101,5 @@ export {
   // implementation
   buildEnvironmentPath,
   buildFilePath,
+  getEnvironmentName,
 };

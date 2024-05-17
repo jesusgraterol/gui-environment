@@ -1,10 +1,12 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
+import { ERRORS } from '../shared/errors.js';
 import {
   ENVIRONMENT_BASE_FILE_NAME,
   ENVIRONMENT_DIR_NAME,
   ENVIRONMENT_FILE_EXT,
   buildEnvironmentPath,
   buildFilePath,
+  getEnvironmentName,
 } from './utils.js';
 
 
@@ -52,5 +54,24 @@ describe('buildFilePath', () => {
     expect(buildFilePath('source', 'development')).toBe(`source/${ENVIRONMENT_BASE_FILE_NAME}/environment.development${ENVIRONMENT_FILE_EXT}`);
     expect(buildFilePath('source', 'staging')).toBe(`source/${ENVIRONMENT_BASE_FILE_NAME}/environment.staging${ENVIRONMENT_FILE_EXT}`);
     expect(buildFilePath('source', 'production')).toBe(`source/${ENVIRONMENT_BASE_FILE_NAME}/environment.production${ENVIRONMENT_FILE_EXT}`);
+  });
+});
+
+
+
+
+
+describe('getEnvironmentName', () => {
+  test('throws if a valid environment name is not passed', () => {
+    expect(() => getEnvironmentName()).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
+    expect(
+      () => getEnvironmentName(undefined, undefined, undefined),
+    ).toThrowError(ERRORS.INVALID_ENVIRONMENT_NAME);
+  });
+
+  test('can retrieve the desired environment name', () => {
+    expect(getEnvironmentName('true')).toBe('development');
+    expect(getEnvironmentName(undefined, 'true')).toBe('staging');
+    expect(getEnvironmentName(undefined, undefined, 'true')).toBe('production');
   });
 });

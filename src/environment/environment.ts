@@ -1,18 +1,18 @@
 import { encodeError } from 'error-message-utils';
 import { copyFile, isDirectory, writeTextFile } from 'fs-utils-sync';
-import { IEnvironmentName, IModuleArgs } from './types.js';
-import { ERRORS } from './environment.errors.js';
+import { IEnvironmentName, IModuleArgs, ERRORS } from '../shared/index.js';
 import {
   ENVIRONMENT_NAMES,
   buildEnvironmentPath,
   buildFilePath,
-} from './environment.utils.js';
-import { buildIndex, buildTypes, buildEnvironment } from './environment.templates.js';
+  getEnvironmentName,
+} from '../utils/index.js';
+import { buildIndex, buildTypes, buildEnvironment } from '../templates/index.js';
 import {
   validateSourcePath,
   canEnvironmentBeInitialized,
   validateEnvironmentName,
-} from './environment.validations.js';
+} from '../validations/index.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -44,6 +44,9 @@ const __init = (srcPath: string): void => {
     writeTextFile(buildFilePath(srcPath, name), buildEnvironment(name === 'production'))
   ));
   __installEnvironment(srcPath, 'development');
+
+  // add the automatically generated environment file to .gitignore
+  // ...
 };
 
 /**
@@ -75,21 +78,27 @@ const __install = (srcPath: string, environment: IEnvironmentName): void => {
  * @param args
  * @throws
  * - INVALID_CLI_ACTION: if an invalid action or no action at all is provided.
- * - INVALID_PATH: if the provided srcPath has an invalid format
- * - NOT_A_DIRECTORY: if the srcPath is not a valid directory
+ * - INVALID_PATH: if the provided src has an invalid format
+ * - NOT_A_DIRECTORY: if the src is not a valid directory
  * - INVALID_ENVIRONMENT_NAME: if the provided environment name is not supported by the package
  */
-const executeAction = ({ srcPath, init, environment }: IModuleArgs): void => {
+const executeAction = ({
+  src = 'src',
+  init,
+  development,
+  staging,
+  production,
+}: IModuleArgs): void => {
   // firstly, validate the provided source path
-  validateSourcePath(srcPath);
+  validateSourcePath(src);
 
   // execute the action accordingly
   if (init) {
-    __init(<string>srcPath);
-  } else if (environment) {
-    __install(<string>srcPath, environment);
+    __init(src);
+  } else if (development || staging || production) {
+    __install(src, getEnvironmentName(development, staging, production));
   } else {
-    throw new Error(encodeError('The CLI must be invoked with a valid action such as: gui-environment --init or gui-environment --environment="development"', ERRORS.INVALID_CLI_ACTION));
+    throw new Error(encodeError('The CLI must be invoked with a valid action such as: gui-environment --init or gui-environment (--development | --staging | --production)', ERRORS.INVALID_CLI_ACTION));
   }
 };
 

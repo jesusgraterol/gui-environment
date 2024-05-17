@@ -1,12 +1,12 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect, vi } from 'vitest';
 import { isDirectory } from 'fs-utils-sync';
-import { ERRORS } from './environment.errors.js';
-import { buildEnvironmentPath } from './environment.utils.js';
+import { ERRORS } from '../shared/index.js';
+import { buildEnvironmentPath } from '../utils/index.js';
 import {
   validateSourcePath,
   validateEnvironmentName,
   canEnvironmentBeInitialized,
-} from './environment.validations.js';
+} from './validations.js';
 
 /* ************************************************************************************************
  *                                             MOCKS                                              *
