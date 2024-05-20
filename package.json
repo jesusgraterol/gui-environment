@@ -1,12 +1,12 @@
 {
   "name": "gui-environment",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The gui-environment package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "start": "ts-lib-builder --tsconfigPath=tsconfig.build.json",
+    "start": "ts-lib-builder --tsconfig=tsconfig.build.json",
     "test": "echo \"Error: tests are executed with  npm run test:(integration|unit)\" && exit 1",
     "test:integration": "vitest run --config vitest.test-integration.config.ts",
     "test:unit": "vitest run --config vitest.test-unit.config.ts",
@@ -41,13 +41,13 @@
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "ts-lib-builder": "^1.0.2",
+    "ts-lib-builder": "^1.0.3",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },
   "dependencies": {
     "argv-utils": "^1.0.2",
-    "error-message-utils": "^1.0.1",
-    "fs-utils-sync": "^1.0.0"
+    "error-message-utils": "^1.0.2",
+    "fs-utils-sync": "^1.0.1"
   }
 }
