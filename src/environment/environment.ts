@@ -17,7 +17,7 @@ import {
   getEnvironmentName,
   buildGITIgnoreContent,
 } from '../utils/index.js';
-import { buildIndex, buildTypes, buildEnvironment } from '../templates/index.js';
+import { buildTypes, buildEnvironment } from '../templates/index.js';
 import { validateSourcePath, canEnvironmentBeInitialized } from '../validations/index.js';
 
 /* ************************************************************************************************
@@ -62,7 +62,6 @@ const __init = (srcPath: string): void => {
   canEnvironmentBeInitialized(buildEnvironmentPath(srcPath));
 
   // create all the base files and once done, install the development environment
-  writeTextFile(buildFilePath(srcPath, 'index'), buildIndex());
   writeTextFile(buildFilePath(srcPath, 'types'), buildTypes());
   ENVIRONMENT_NAMES.forEach((name) => (
     writeTextFile(buildFilePath(srcPath, name), buildEnvironment(name === 'production'))

@@ -2,7 +2,7 @@ import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } fr
 import { createDirectory, deleteDirectory, readTextFile } from 'fs-utils-sync';
 import { IEnvironmentName, IModuleArgs, ENVIRONMENT_NAMES, ERRORS } from '../shared/index.js';
 import { buildFilePath } from '../utils/index.js';
-import { buildEnvironment, buildIndex, buildTypes } from '../templates/index.js';
+import { buildEnvironment, buildTypes } from '../templates/index.js';
 import { executeAction } from './environment.js';
 
 /* ************************************************************************************************
@@ -74,7 +74,6 @@ describe('executeAction', () => {
     test('can fully initialize the environment', () => {
       createDirectory(SRC);
       executeAction(a({ src: SRC, init: 'true' }));
-      expect(rf('index')).toBe(buildIndex());
       expect(rf('types')).toBe(buildTypes());
       ENVIRONMENT_NAMES.forEach((n) => expect(rf(n)).toBe(buildEnvironment(n === 'production')));
       expect(rf('environment')).toBe(buildEnvironment(false));

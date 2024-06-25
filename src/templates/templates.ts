@@ -5,18 +5,6 @@
  ************************************************************************************************ */
 
 /**
- * Builds the template for the index.ts file that proxies all the environment contents.
- * @returns string
- */
-const buildIndex = (): string => {
-  let template = 'export * from \'./types\';\n';
-  template += 'export * from \'./environment\';\n';
-
-  // finally, return the finished template
-  return template;
-};
-
-/**
  * Builds the template for the types.ts file that handles the initialization of the environment's
  * interface
  * @returns string
@@ -83,7 +71,6 @@ const buildEnvironment = (production: boolean): string => {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
-  buildIndex,
   buildTypes,
   buildEnvironment,
 };
