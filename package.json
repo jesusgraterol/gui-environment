@@ -1,6 +1,6 @@
 {
   "name": "gui-environment",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The gui-environment package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

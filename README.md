@@ -49,7 +49,6 @@ project
     │  |         ├───environment.production.ts
     │  |         ├───environment.staging.ts
     │  |         ├───environment.ts
-    │  |         ├───index.ts
     │  |         └───types.ts
     │  └───main.tsx
     │
@@ -72,7 +71,7 @@ Use the environment variables anywhere:
 
 ```typescript
 // main.tsx
-import { ENVIRONMENT } from './environment';
+import { ENVIRONMENT } from './environment/environment.ts';
 
 ENVIRONMENT
 // {
