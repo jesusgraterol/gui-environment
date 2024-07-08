@@ -19,7 +19,7 @@ const buildTypes = (): string => {
   template += ' * The following environment variables are used to modify the behavior of the app based on the\n';
   template += ' * deployment environment of the build.\n';
   template += ' */\n';
-  template += 'interface IEnvironment {\n';
+  template += 'type IEnvironment = {\n';
   template += '  // the kind of build that was performed\n';
   template += '  production: boolean,\n\n';
   template += '  // the current version of the GUI\n';
@@ -49,7 +49,7 @@ const buildEnvironment = (production: boolean): string => {
   template += ' ************************************************************************************************ */\n';
   template += 'const ENVIRONMENT: IEnvironment = {\n';
   template += `  production: ${production},\n`;
-  template += '  version: \'1.0.0\',\n';
+  template += '  version: \'(package.json).version\',\n';
   template += '};\n';
   template += '\n\n\n\n\n';
   template += '/* ************************************************************************************************\n';

@@ -1,5 +1,6 @@
 import { normalize } from 'node:path';
 import { encodeError } from 'error-message-utils';
+import { readJSONFile } from 'fs-utils-sync';
 import {
   IEnvironmentName,
   ENVIRONMENT_DIR_NAME,
@@ -79,6 +80,20 @@ const getEnvironmentName = (
  */
 const buildGITIgnoreContent = (src: string, toBeAppended?: boolean): string => `${toBeAppended ? '\n' : ''}# gui-environment output\n${buildFilePath(src, 'environment')}\n`;
 
+/**
+ * Reads the GUI's version from the package.json file and returns it.
+ * @returns string
+ */
+const getGUIVersion = (): string => {
+  const { version } = readJSONFile('package.json');
+  if (typeof version !== 'string' || !version.length) {
+    throw new Error(encodeError(`The GUI's version could not be extracted from the package.json file. Received: ${version}`, ERRORS.INVALID_PACKAGE_FILE));
+  }
+  return version;
+};
+
+
+
 
 
 /* ************************************************************************************************
@@ -90,4 +105,5 @@ export {
   buildFilePath,
   getEnvironmentName,
   buildGITIgnoreContent,
+  getGUIVersion,
 };

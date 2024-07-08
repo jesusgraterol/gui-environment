@@ -1,7 +1,7 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect } from 'vitest';
 import { createDirectory, deleteDirectory, readTextFile } from 'fs-utils-sync';
 import { IEnvironmentName, IModuleArgs, ENVIRONMENT_NAMES, ERRORS } from '../shared/index.js';
-import { buildFilePath } from '../utils/index.js';
+import { buildFilePath, getGUIVersion } from '../utils/index.js';
 import { buildEnvironment, buildTypes } from '../templates/index.js';
 import { executeAction } from './environment.js';
 
@@ -10,7 +10,12 @@ import { executeAction } from './environment.js';
  ************************************************************************************************ */
 
 // the path to the test src directory
-const SRC: string = 'src-test';
+const SRC = 'src-test';
+
+// the current version of the GUI
+const version = getGUIVersion();
+
+
 
 
 
@@ -35,6 +40,12 @@ const a = ({
 
 //  reads a file by name
 const rf = (fileName: string | IEnvironmentName) => readTextFile(buildFilePath(SRC, fileName));
+
+// builds an environment in string format
+const be = (production: boolean): string => buildEnvironment(production).replace(
+  'version: \'(package.json).version\'',
+  `version: '${version}'`,
+);
 
 
 
@@ -76,7 +87,7 @@ describe('executeAction', () => {
       executeAction(a({ src: SRC, init: 'true' }));
       expect(rf('types')).toBe(buildTypes());
       ENVIRONMENT_NAMES.forEach((n) => expect(rf(n)).toBe(buildEnvironment(n === 'production')));
-      expect(rf('environment')).toBe(buildEnvironment(false));
+      expect(rf('environment')).toBe(be(false));
     });
 
     test('cannot initialize the environment twice', () => {
@@ -93,17 +104,17 @@ describe('executeAction', () => {
     test('initializes the environment in case it hadn\'t been', () => {
       createDirectory(SRC);
       executeAction(a({ src: SRC, development: 'true' }));
-      expect(rf('environment')).toBe(buildEnvironment(false));
+      expect(rf('environment')).toBe(be(false));
     });
 
     test('can install any environment', () => {
       createDirectory(SRC);
       executeAction(a({ src: SRC, init: 'true' }));
-      expect(rf('environment')).toBe(buildEnvironment(false));
+      expect(rf('environment')).toBe(be(false));
       executeAction(a({ src: SRC, production: 'true' }));
-      expect(rf('environment')).toBe(buildEnvironment(true));
+      expect(rf('environment')).toBe(be(true));
       executeAction(a({ src: SRC, staging: 'true' }));
-      expect(rf('environment')).toBe(buildEnvironment(false));
+      expect(rf('environment')).toBe(be(false));
     });
   });
 });

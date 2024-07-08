@@ -1,5 +1,4 @@
 import {
-  copyFile,
   isDirectory,
   isFile,
   readTextFile,
@@ -16,6 +15,7 @@ import {
   buildFilePath,
   getEnvironmentName,
   buildGITIgnoreContent,
+  getGUIVersion,
 } from '../utils/index.js';
 import { buildTypes, buildEnvironment } from '../templates/index.js';
 import { validateSourcePath, canEnvironmentBeInitialized } from '../validations/index.js';
@@ -29,10 +29,21 @@ import { validateSourcePath, canEnvironmentBeInitialized } from '../validations/
  * @param srcPath
  * @param name
  */
-const __installEnvironment = (srcPath: string, name: IEnvironmentName): void => copyFile(
-  buildFilePath(srcPath, name),
-  buildFilePath(srcPath, 'environment'),
-);
+const __installEnvironment = (srcPath: string, name: IEnvironmentName): void => {
+  // init the paths
+  const src = buildFilePath(srcPath, name);
+  const dest = buildFilePath(srcPath, 'environment');
+
+  // read the source file and set the GUI's Version based on the package.json file
+  const version = getGUIVersion();
+  const srcFile = readTextFile(src).replace(
+    'version: \'(package.json).version\'',
+    `version: '${version}'`,
+  );
+
+  // finally, save the file
+  writeTextFile(dest, srcFile);
+};
 
 /**
  * Adds the automatically generated environment file into the .gitignore file. If the file already

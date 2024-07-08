@@ -1,6 +1,6 @@
 {
   "name": "gui-environment",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "The gui-environment package is a command-line tool that simplifies managing environment variables for your application. Easily set up different configurations based on your build mode (development or production) for a smooth development workflow.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -37,17 +37,17 @@
   },
   "homepage": "https://github.com/jesusgraterol/gui-environment#readme",
   "devDependencies": {
-    "@types/node": "^20.12.8",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
+    "@types/node": "^20.14.10",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "ts-lib-builder": "^1.0.3",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.3",
     "vitest": "^1.6.0"
   },
   "dependencies": {
     "argv-utils": "^1.0.2",
-    "error-message-utils": "^1.0.2",
-    "fs-utils-sync": "^1.0.1"
+    "error-message-utils": "^1.1.0",
+    "fs-utils-sync": "^1.0.2"
   }
 }
