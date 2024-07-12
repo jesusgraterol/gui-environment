@@ -21,9 +21,9 @@ const buildTypes = (): string => {
   template += ' */\n';
   template += 'type IEnvironment = {\n';
   template += '  // the kind of build that was performed\n';
-  template += '  production: boolean,\n\n';
+  template += '  production: boolean;\n\n';
   template += '  // the current version of the GUI\n';
-  template += '  version: string,\n';
+  template += '  version: string;\n';
   template += '};\n';
   template += '\n\n\n\n\n';
   template += '/* ************************************************************************************************\n';
