@@ -23,12 +23,12 @@ Include the `gui-environment` binary in your `package.json` file:
 ```json
 ...
 "scripts": {
-  "build-dev": "gui-environment --development && vite && ...",
-  "build-staging": "gui-environment --staging && vite && ...",
+  "build-dev": "gui-environment --development && tsc -b && vite build && ...",
+  "build-staging": "gui-environment --staging && tsc -b && vite build && ...",
   "build-production": "gui-environment --production && tsc -b && vite build && ...",
 
   // using a custom source path
-  "build-dev": "gui-environment --src='custom-src' --development && vite && ...",
+  "build-dev": "gui-environment --src='custom-src' --development && tsc -b && vite build && ...",
 }
 ...
 ```
