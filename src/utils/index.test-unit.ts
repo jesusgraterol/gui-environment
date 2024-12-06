@@ -3,14 +3,14 @@ import {
   ENVIRONMENT_BASE_FILE_NAME,
   ENVIRONMENT_DIR_NAME,
   ENVIRONMENT_FILE_EXT,
-  ERRORS,
-} from '../shared/index.js';
+} from '../shared/constants.js';
+import { ERRORS } from '../shared/errors.js';
 import {
   buildEnvironmentPath,
   buildFilePath,
   getEnvironmentName,
   buildGITIgnoreContent,
-} from './utils.js';
+} from './index.js';
 
 
 /* ************************************************************************************************

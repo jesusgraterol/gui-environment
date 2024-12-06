@@ -8,27 +8,27 @@ The `gui-environment` package is a command-line tool that simplifies managing en
 
 Install the package:
 ```bash
-$ npm install -D gui-environment
+npm install -D gui-environment
 ```
 
 Initialize your project's environment:
 ```bash
-$ npx gui-environment --init
+npx gui-environment --init
 
-# Using a custom source path
-$ npx gui-environment --src="custom-src" --init
+# using a custom source path
+npx gui-environment --src="custom-src" --init
 ```
 
 Include the `gui-environment` binary in your `package.json` file:
 ```json
 ...
 "scripts": {
-  "build-dev": "gui-environment --development && tsc && ...",
-  "build-staging": "gui-environment --staging && tsc && ...",
-  "build-production": "gui-environment --production && tsc && ...",
+  "build-dev": "gui-environment --development && vite && ...",
+  "build-staging": "gui-environment --staging && vite && ...",
+  "build-production": "gui-environment --production && tsc -b && vite build && ...",
 
-  // Using a custom source path
-  "build-dev": "gui-environment --src='custom-src' --development && tsc && ...",
+  // using a custom source path
+  "build-dev": "gui-environment --src='custom-src' --development && vite && ...",
 }
 ...
 ```
@@ -53,7 +53,7 @@ project
     │  └───main.tsx
     │
     package.json
-    tscofig.json
+    tsconfig.json
     ...
 ```
 
@@ -61,11 +61,13 @@ project
 
 Once initialized, include your environment variables in the following files accordingly:
 
-1. `environment.development.ts`
+- `environment.development.ts`
 
-2. `environment.production.ts`
+- `environment.production.ts`
 
-3. `environment.staging.ts`
+- `environment.staging.ts`
+
+- `types.ts`
 
 Use the environment variables anywhere:
 
@@ -102,11 +104,11 @@ ENVIRONMENT
 
 ## Running the Tests
 ```bash
-# Unit Tests
-$ npm run test:unit
+# unit tests
+npm run test:unit
 
-# Integration Tests
-$ npm run test:integration
+# integration tests
+npm run test:integration
 ```
 
 
@@ -123,29 +125,19 @@ $ npm run test:integration
 
 <br/>
 
-## Acknowledgments
-
-- [Angular CLI](https://angular.dev/)
-
-
-
-
-
-<br/>
-
 ## Deployment
 
 Install dependencies:
 ```bash
-$ npm install
+npm install
 ```
 
 Build the project:
 ```bash
-$ npm start
+npm start
 ```
 
 Publish to `npm`:
 ```bash
-$ npm publish
+npm publish
 ```
