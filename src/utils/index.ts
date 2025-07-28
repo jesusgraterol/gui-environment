@@ -18,12 +18,10 @@ import { ERRORS } from '../shared/errors.js';
  * Builds the path to the environment directory. If a fileName is passed it is included.
  * @returns string
  */
-const buildEnvironmentPath = (
-  srcPath: string,
-  fileName?: string,
-): string => (typeof fileName === 'string'
-  ? normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}/${fileName}`)
-  : normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}`));
+const buildEnvironmentPath = (srcPath: string, fileName?: string): string =>
+  typeof fileName === 'string'
+    ? normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}/${fileName}`)
+    : normalize(`${srcPath}/${ENVIRONMENT_DIR_NAME}`);
 
 /**
  * Puts together the name for a file including its extension.
@@ -39,11 +37,10 @@ const __buildFileName = (fileName: string): string => `${fileName}${ENVIRONMENT_
  * @param fileName
  * @returns string
  */
-const buildFilePath = (srcPath: string, fileName: string | IEnvironmentName): string => (
+const buildFilePath = (srcPath: string, fileName: string | IEnvironmentName): string =>
   ENVIRONMENT_NAMES.includes(fileName as IEnvironmentName)
     ? buildEnvironmentPath(srcPath, __buildFileName(`${ENVIRONMENT_BASE_FILE_NAME}.${fileName}`))
-    : buildEnvironmentPath(srcPath, __buildFileName(fileName))
-);
+    : buildEnvironmentPath(srcPath, __buildFileName(fileName));
 
 /**
  * Determines the environment name based on the provided args.
@@ -68,7 +65,12 @@ const getEnvironmentName = (
   if (production) {
     return 'production';
   }
-  throw new Error(encodeError('The provided environment name is invalid. Ensure to invoke the CLI with a valid environment name: gui-environment (--development | --staging | --production)', ERRORS.INVALID_ENVIRONMENT_NAME));
+  throw new Error(
+    encodeError(
+      'The provided environment name is invalid. Ensure to invoke the CLI with a valid environment name: gui-environment (--development | --staging | --production)',
+      ERRORS.INVALID_ENVIRONMENT_NAME,
+    ),
+  );
 };
 
 /**
@@ -78,7 +80,8 @@ const getEnvironmentName = (
  * @param toBeAppended?
  * @returns string
  */
-const buildGITIgnoreContent = (src: string, toBeAppended?: boolean): string => `${toBeAppended ? '\n' : ''}# gui-environment output\n${buildFilePath(src, 'environment')}\n`;
+const buildGITIgnoreContent = (src: string, toBeAppended?: boolean): string =>
+  `${toBeAppended ? '\n' : ''}# gui-environment output\n${buildFilePath(src, 'environment')}\n`;
 
 /**
  * Reads the GUI's version from the package.json file and returns it.
@@ -87,14 +90,15 @@ const buildGITIgnoreContent = (src: string, toBeAppended?: boolean): string => `
 const getGUIVersion = (): string => {
   const { version } = readJSONFile('package.json');
   if (typeof version !== 'string' || !version.length) {
-    throw new Error(encodeError(`The GUI's version could not be extracted from the package.json file. Received: ${version}`, ERRORS.INVALID_PACKAGE_FILE));
+    throw new Error(
+      encodeError(
+        `The GUI's version could not be extracted from the package.json file. Received: ${version}`,
+        ERRORS.INVALID_PACKAGE_FILE,
+      ),
+    );
   }
   return version;
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

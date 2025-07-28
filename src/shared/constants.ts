@@ -19,9 +19,6 @@ const ENVIRONMENT_NAMES: IEnvironmentName[] = ['development', 'staging', 'produc
 // the path to the git ignore file
 const GIT_IGNORE_PATH: string = '.gitignore';
 
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */

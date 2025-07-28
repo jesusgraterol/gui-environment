@@ -17,52 +17,40 @@ const SRC = 'src-test';
 // the current version of the GUI
 const version = getGUIVersion();
 
-
-
-
-
 /* ************************************************************************************************
  *                                            HELPERS                                             *
  ************************************************************************************************ */
 
 // builds the args object
-const a = ({
-  src,
-  init,
-  development,
-  staging,
-  production,
-}: Partial<IModuleArgs>): IModuleArgs => (<IModuleArgs>{
-  src,
-  init,
-  development,
-  staging,
-  production,
-});
+const a = ({ src, init, development, staging, production }: Partial<IModuleArgs>): IModuleArgs =>
+  <IModuleArgs>{
+    src,
+    init,
+    development,
+    staging,
+    production,
+  };
 
 //  reads a file by name
 const rf = (fileName: string | IEnvironmentName) => readTextFile(buildFilePath(SRC, fileName));
 
 // builds an environment in string format
-const be = (production: boolean): string => buildEnvironment(production).replace(
-  'version: \'(package.json).version\'',
-  `version: '${version}'`,
-);
-
-
-
-
+const be = (production: boolean): string =>
+  buildEnvironment(production).replace(
+    "version: '(package.json).version'",
+    `version: '${version}'`,
+  );
 
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('executeAction', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
   afterEach(() => {
     deleteDirectory(SRC);
@@ -79,10 +67,6 @@ describe('executeAction', () => {
     });
   });
 
-
-
-
-
   describe('init', () => {
     test('can fully initialize the environment', () => {
       createDirectory(SRC);
@@ -95,15 +79,14 @@ describe('executeAction', () => {
     test('cannot initialize the environment twice', () => {
       createDirectory(SRC);
       executeAction(a({ src: SRC, init: 'true' }));
-      expect(() => executeAction(a({ src: SRC, init: 'true' }))).toThrowError(ERRORS.ENVIRONMENT_ALREADY_INITIALIZED);
+      expect(() => executeAction(a({ src: SRC, init: 'true' }))).toThrowError(
+        ERRORS.ENVIRONMENT_ALREADY_INITIALIZED,
+      );
     });
   });
 
-
-
-
   describe('install', () => {
-    test('initializes the environment in case it hadn\'t been', () => {
+    test("initializes the environment in case it hadn't been", () => {
       createDirectory(SRC);
       executeAction(a({ src: SRC, development: 'true' }));
       expect(rf('environment')).toBe(be(false));

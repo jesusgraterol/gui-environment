@@ -8,7 +8,7 @@ The `gui-environment` package is a command-line tool that simplifies managing en
 
 Install the package:
 ```bash
-npm install -D gui-environment
+npm i -D gui-environment
 ```
 
 Initialize your project's environment:
@@ -118,26 +118,3 @@ npm run test:integration
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
-
-
-
-<br/>
-
-## Deployment
-
-Install dependencies:
-```bash
-npm install
-```
-
-Build the project:
-```bash
-npm start
-```
-
-Publish to `npm`:
-```bash
-npm publish
-```

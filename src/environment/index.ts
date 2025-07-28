@@ -1,9 +1,4 @@
-import {
-  isDirectory,
-  isFile,
-  readTextFile,
-  writeTextFile,
-} from 'fs-utils-sync';
+import { isDirectory, isFile, readTextFile, writeTextFile } from 'fs-utils-sync';
 import { IEnvironmentName, IModuleArgs } from '../shared/types.js';
 import { ENVIRONMENT_NAMES, GIT_IGNORE_PATH } from '../shared/constants.js';
 import {
@@ -33,7 +28,7 @@ const __installEnvironment = (srcPath: string, name: IEnvironmentName): void => 
   // read the source file and set the GUI's Version based on the package.json file
   const version = getGUIVersion();
   const srcFile = readTextFile(src).replace(
-    'version: \'(package.json).version\'',
+    "version: '(package.json).version'",
     `version: '${version}'`,
   );
 
@@ -70,9 +65,9 @@ const __init = (srcPath: string): void => {
 
   // create all the base files and once done, install the development environment
   writeTextFile(buildFilePath(srcPath, 'types'), buildTypes());
-  ENVIRONMENT_NAMES.forEach((name) => (
-    writeTextFile(buildFilePath(srcPath, name), buildEnvironment(name === 'production'))
-  ));
+  ENVIRONMENT_NAMES.forEach((name) =>
+    writeTextFile(buildFilePath(srcPath, name), buildEnvironment(name === 'production')),
+  );
   __installEnvironment(srcPath, 'development');
 
   // add the automatically generated environment file to .gitignore
@@ -93,10 +88,6 @@ const __install = (srcPath: string, environment: IEnvironmentName): void => {
   }
   __installEnvironment(srcPath, environment);
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                            EXECUTION                                           *
@@ -128,13 +119,7 @@ const executeAction = ({
   }
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  executeAction,
-};
+export { executeAction };

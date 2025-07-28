@@ -1,5 +1,3 @@
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -11,12 +9,16 @@
  */
 const buildTypes = (): string => {
   let template = '\n\n';
-  template += '/* ************************************************************************************************\n';
-  template += ' *                                             TYPES                                              *\n';
-  template += ' ************************************************************************************************ */\n\n';
+  template +=
+    '/* ************************************************************************************************\n';
+  template +=
+    ' *                                             TYPES                                              *\n';
+  template +=
+    ' ************************************************************************************************ */\n\n';
   template += '/**\n';
   template += ' * Environment Variables\n';
-  template += ' * The following environment variables are used to modify the behavior of the app based on the\n';
+  template +=
+    ' * The following environment variables are used to modify the behavior of the app based on the\n';
   template += ' * deployment environment of the build.\n';
   template += ' */\n';
   template += 'type IEnvironment = {\n';
@@ -26,9 +28,12 @@ const buildTypes = (): string => {
   template += '  version: string;\n';
   template += '};\n';
   template += '\n\n\n\n\n';
-  template += '/* ************************************************************************************************\n';
-  template += ' *                                         MODULE EXPORTS                                         *\n';
-  template += ' ************************************************************************************************ */\n';
+  template +=
+    '/* ************************************************************************************************\n';
+  template +=
+    ' *                                         MODULE EXPORTS                                         *\n';
+  template +=
+    ' ************************************************************************************************ */\n';
   template += 'export type {\n';
   template += '  IEnvironment,\n';
   template += '};\n';
@@ -43,18 +48,24 @@ const buildTypes = (): string => {
  * @returns string
  */
 const buildEnvironment = (production: boolean): string => {
-  let template = 'import { IEnvironment } from \'./types\';\n\n';
-  template += '/* ************************************************************************************************\n';
-  template += ' *                                      ENVIRONMENT VARIABLES                                     *\n';
-  template += ' ************************************************************************************************ */\n';
+  let template = "import { IEnvironment } from './types';\n\n";
+  template +=
+    '/* ************************************************************************************************\n';
+  template +=
+    ' *                                      ENVIRONMENT VARIABLES                                     *\n';
+  template +=
+    ' ************************************************************************************************ */\n';
   template += 'const ENVIRONMENT: IEnvironment = {\n';
   template += `  production: ${production},\n`;
-  template += '  version: \'(package.json).version\',\n';
+  template += "  version: '(package.json).version',\n";
   template += '};\n';
   template += '\n\n\n\n\n';
-  template += '/* ************************************************************************************************\n';
-  template += ' *                                         MODULE EXPORTS                                         *\n';
-  template += ' ************************************************************************************************ */\n';
+  template +=
+    '/* ************************************************************************************************\n';
+  template +=
+    ' *                                         MODULE EXPORTS                                         *\n';
+  template +=
+    ' ************************************************************************************************ */\n';
   template += 'export {\n';
   template += '  ENVIRONMENT,\n';
   template += '};\n';
@@ -63,14 +74,7 @@ const buildEnvironment = (production: boolean): string => {
   return template;
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  buildTypes,
-  buildEnvironment,
-};
+export { buildTypes, buildEnvironment };

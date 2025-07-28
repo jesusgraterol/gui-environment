@@ -18,7 +18,12 @@ const validateSourcePath = (srcPath: string | undefined): void => {
     throw new Error(encodeError(`The src '${srcPath}' is invalid.`, ERRORS.INVALID_PATH));
   }
   if (!isDirectory(srcPath)) {
-    throw new Error(encodeError(`The src directory '${srcPath}' does not exist or is not considered a directory by the OS.`, ERRORS.NOT_A_DIRECTORY));
+    throw new Error(
+      encodeError(
+        `The src directory '${srcPath}' does not exist or is not considered a directory by the OS.`,
+        ERRORS.NOT_A_DIRECTORY,
+      ),
+    );
   }
 };
 
@@ -30,16 +35,16 @@ const validateSourcePath = (srcPath: string | undefined): void => {
  */
 const canEnvironmentBeInitialized = (environmentDirPath: string) => {
   if (isDirectory(environmentDirPath)) {
-    throw new Error(encodeError(`The environment dir '${environmentDirPath} cannot be initialized because it already has been.'`, ERRORS.ENVIRONMENT_ALREADY_INITIALIZED));
+    throw new Error(
+      encodeError(
+        `The environment dir '${environmentDirPath} cannot be initialized because it already has been.'`,
+        ERRORS.ENVIRONMENT_ALREADY_INITIALIZED,
+      ),
+    );
   }
 };
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  validateSourcePath,
-  canEnvironmentBeInitialized,
-};
+export { validateSourcePath, canEnvironmentBeInitialized };
